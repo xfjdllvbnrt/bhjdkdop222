@@ -18,7 +18,7 @@ echo -e " LOG UPDATE" | tee -a log-update.txt
 echo -e " " | tee -a log-update.txt
 echo -e " Ver 3.3" | tee -a log-update.txt
 echo -e " - Upgrade V2ray Core" | tee -a log-update.txt
-echo -e " - Stunnel Fix Inecure" | tee -a log-update.txt
+echo -e " - Stunnel Fix Insecure" | tee -a log-update.txt
 echo -e " - Fix Backup" | tee -a log-update.txt
 echo -e " " | tee -a log-update.txt
 sleep 1
