@@ -141,7 +141,7 @@ password cjqlukttctkqhrmf
 logfile ~/.msmtp.log
 EOF
 
-./go
+go
 echo "3.3" > /home/ver
 fi
 clear
