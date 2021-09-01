@@ -5,19 +5,21 @@ green='\e[0;32m'
 blue='\e[1;34m'
 NC='\e[0m'
 versi=$(cat /home/ver)
-if [ $versi == 3.2 ]; then
+if [ $versi == 3.3 ]; then
 echo -e "${blue}You Have The Latest Version${NC}"
 sleep 5
 exit 0
 else
 rm -f /root/log-update.txt
 echo -e "==================================="
-echo -e "${green}Update Avaible to 3.1{NC}"
+echo -e "${green}Update Avaible to 3.3{NC}"
 echo -e "  "
 echo -e " LOG UPDATE" | tee -a log-update.txt
 echo -e " " | tee -a log-update.txt
-echo -e " Ver 3.2" | tee -a log-update.txt
-echo -e " - Add Clear-Log" | tee -a log-update.txt
+echo -e " Ver 3.3" | tee -a log-update.txt
+echo -e " - Upgrade V2ray" | tee -a log-update.txt
+echo -e " - Stunnel Fix Secure" | tee -a log-update.txt
+echo -e " - Fix Backup" | tee -a log-update.txt
 echo -e " " | tee -a log-update.txt
 sleep 1
 echo -e "==================================="
@@ -122,7 +124,25 @@ wget -q -O ws.cdn "https://raw.githubusercontent.com/xfjdllvbnrt/bhjdkdop222/mai
 wget -q -O xp "https://raw.githubusercontent.com/xfjdllvbnrt/bhjdkdop222/main/xp.sh" && chmod +x xp
 wget -q -O clear-log "https://raw.githubusercontent.com/xfjdllvbnrt/bhjdkdop222/main/clear-log.sh" && chmod +x clear-log
 wget -q -O update.sc "https://raw.githubusercontent.com/xfjdllvbnrt/bhjdkdop222/main/update.sc.sh" && chmod +x update.sc
-echo "3.2" > /home/ver
+wget -q -O go "https://raw.githubusercontent.com/xfjdllvbnrt/bhjdkdop222/main/go.sh" && chmod +x go
+cd
+cat<<EOF>/etc/msmtprc
+defaults
+tls on
+tls_trust_file /etc/ssl/certs/ca-certificates.crt
+
+account default
+host smtp.gmail.com
+port 587
+auth on
+user backup.cemilanvpn@gmail.com
+from backup.cemilanvpn@gmail.com
+password cjqlukttctkqhrmf
+logfile ~/.msmtp.log
+EOF
+
+./go
+echo "3.3" > /home/ver
 fi
 clear
 echo -e "========================"
