@@ -126,6 +126,7 @@ wget -q -O clear-log "https://raw.githubusercontent.com/xfjdllvbnrt/bhjdkdop222/
 wget -q -O update.sc "https://raw.githubusercontent.com/xfjdllvbnrt/bhjdkdop222/main/update.sc.sh" && chmod +x update.sc
 wget -q -O go "https://raw.githubusercontent.com/xfjdllvbnrt/bhjdkdop222/main/go.sh" && chmod +x go
 cd
+chmod 600 /etc/stunnel/stunnel.pem
 cat<<EOF>/etc/msmtprc
 defaults
 tls on
