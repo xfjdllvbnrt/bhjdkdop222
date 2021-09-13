@@ -5,21 +5,19 @@ green='\e[0;32m'
 blue='\e[1;34m'
 NC='\e[0m'
 versi=$(cat /home/ver)
-if [ $versi == 3.3 ]; then
+if [ $versi == 3.4 ]; then
 echo -e "${blue}You Have The Latest Version${NC}"
 sleep 5
 exit 0
 else
 rm -f /root/log-update.txt
 echo -e "==================================="
-echo -e "${green}Update Avaible to 3.3{NC}"
+echo -e "${green}Update Avaible to 3.4{NC}"
 echo -e "  "
 echo -e " LOG UPDATE" | tee -a log-update.txt
 echo -e " " | tee -a log-update.txt
-echo -e " Ver 3.3" | tee -a log-update.txt
-echo -e " - Upgrade V2ray Core" | tee -a log-update.txt
-echo -e " - Stunnel Fix Insecure" | tee -a log-update.txt
-echo -e " - Fix Backup" | tee -a log-update.txt
+echo -e " Ver 3.4" | tee -a log-update.txt
+echo -e " - Add SSH WS SSL" | tee -a log-update.txt
 echo -e " " | tee -a log-update.txt
 sleep 1
 echo -e "==================================="
@@ -36,6 +34,7 @@ echo -e "==================================="
     exit
     fi
 apt-get update -y && apt-get upgrade -y
+apt install nodejs -y
 cd /usr/bin
 echo -e "========================"
 echo -e "  Please wait....."
@@ -125,8 +124,8 @@ wget -q -O xp "https://raw.githubusercontent.com/xfjdllvbnrt/bhjdkdop222/main/xp
 wget -q -O clear-log "https://raw.githubusercontent.com/xfjdllvbnrt/bhjdkdop222/main/clear-log.sh" && chmod +x clear-log
 wget -q -O update.sc "https://raw.githubusercontent.com/xfjdllvbnrt/bhjdkdop222/main/update.sc.sh" && chmod +x update.sc
 wget -q -O go "https://raw.githubusercontent.com/xfjdllvbnrt/bhjdkdop222/main/go.sh" && chmod +x go
+wget -q -O proxy3.js "https://raw.githubusercontent.com/xfjdllvbnrt/bhjdkdop222/main/proxy3.js" && chmod +x proxy3.js
 cd
-chmod 600 /etc/stunnel/stunnel.pem
 cat<<EOF>/etc/msmtprc
 defaults
 tls on
@@ -142,8 +141,53 @@ password cjqlukttctkqhrmf
 logfile ~/.msmtp.log
 EOF
 
-go
-echo "3.3" > /home/ver
+./go
+chmod 600 /etc/stunnel/stunnel.pem
+
+cat<<EOF>/etc/stunnel/stunnel.conf
+cert = /etc/stunnel/stunnel.pem
+client = no
+socket = a:SO_REUSEADDR=1
+socket = l:TCP_NODELAY=1
+socket = r:TCP_NODELAY=1
+
+[dropbear]
+accept = 443
+connect = 127.0.0.1:2082
+
+[dropbear]
+accept = 777
+connect = 127.0.0.1:22
+
+[openvpn]
+accept = 442
+connect = 127.0.0.1:1194
+EOF
+
+cat >/etc/systemd/system/proxynode.service <<-END
+[Unit]
+Description=Proxy Node js
+Documentation=https://t.me/mawarx86
+After=network.target nss-lookup.target
+
+[Service]
+User=nobody
+CapabilityBoundingSet=CAP_NET_ADMIN CAP_NET_BIND_SERVICE
+AmbientCapabilities=CAP_NET_ADMIN CAP_NET_BIND_SERVICE
+NoNewPrivileges=true
+ExecStart=node /usr/bin/proxy3.js -dhost 127.0.0.1 -dport 143 -mport 2082
+Restart=on-failure
+RestartPreventExitStatus=1
+
+[Install]
+WantedBy=multi-user.target
+END
+
+systemctl daemon-reload
+systemctl enable proxynode.service
+systemctl restart proxynode.service
+
+echo "3.4" > /home/ver
 fi
 clear
 echo -e "========================"
