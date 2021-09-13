@@ -192,7 +192,8 @@ fi
 clear
 echo -e "========================"
 echo -e "  Update Complete"
-echo -e "  Go to home in 5s"
+echo -e "  Go to home and reboot in 5s"
 echo -e "========================"
 sleep 5
 home
+reboot
