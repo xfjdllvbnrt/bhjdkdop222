@@ -5,16 +5,12 @@ blue='\e[1;34m'
 NC='\e[0m'
 MYIP=$(wget -qO- https://icanhazip.com/)
 IP=$(wget -qO- https://icanhazip.com/)
-
+wget https://raw.githubusercontent.com/xfjdllvbnrt/hjskodllsm111/main/domain.txt
 apt install idn -y
 apt install jq curl -y
-
-wget https://raw.githubusercontent.com/xfjdllvbnrt/hjskodllsm111/main/domain.txt
-
 DOMAIN=$(cat domain.txt | shuf -n 1)
-SUB=$(</dev/urandom tr -dc a-z0-9 | head -c4)
-SUB_DOMAIN=$SUB.$DOMAIN
-
+sub=$(</dev/urandom tr -dc a-z0-9 | head -c4)
+SUB_DOMAIN=${sub}.${DOMAIN}
 CF_ID=ruangtambahan1@gmail.com
 CF_KEY=bb2a2607ea3abbfe4ab4ac9195f48fc725a3b
 set -euo pipefail
