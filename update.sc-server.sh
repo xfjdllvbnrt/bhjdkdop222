@@ -12,7 +12,7 @@ exit 0
 else
 rm -f /root/log-update.txt
 echo -e "==================================="
-echo -e "${green}Update Avaible to 3.6${NC}"
+echo -e "${green}Update Avaible to 3.7${NC}"
 echo -e "  "
 echo -e " LOG UPDATE" | tee -a log-update.txt
 echo -e " " | tee -a log-update.txt
