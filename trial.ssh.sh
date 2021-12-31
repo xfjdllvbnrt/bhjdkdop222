@@ -76,7 +76,7 @@ Port Squid :$sqd
 Port UDPGW : 7100, 7200, 7300
 ━━━━━━━━━━━━━━━━━━
 Payload WS-CDN :
-GET / HTTP/1.1[crlf]Host: $domain[crlf]Upgrade: websocket[crlf][crlf]
+GET wss://bug.com/ HTTP/1.1[crlf]Host: $domain[crlf]Upgrade: websocket[crlf][crlf]
 ━━━━━━━━━━━━━━━━━━
 OpenVPN Link Download :
 TCP : http://$MYIP:81/client-tcp-$ovpn.ovpn

