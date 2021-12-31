@@ -5,7 +5,7 @@ green='\e[0;32m'
 blue='\e[1;34m'
 NC='\e[0m'
 versi=$(cat /home/ver)
-if [ $versi == 3.6 ]; then
+if [ $versi == 3.7 ]; then
 echo -e "${blue}You Have The Latest Version${NC}"
 sleep 5
 exit 0
@@ -16,7 +16,7 @@ echo -e "${green}Update Avaible to 3.6${NC}"
 echo -e "  "
 echo -e " LOG UPDATE" | tee -a log-update.txt
 echo -e " " | tee -a log-update.txt
-echo -e " Ver 3.6" | tee -a log-update.txt
+echo -e " Ver 3.7" | tee -a log-update.txt
 echo -e " - Add Autorestart for WS-SSL" | tee -a log-update.txt
 echo -e " - Minor Fixed" | tee -a log-update.txt
 echo -e " " | tee -a log-update.txt
@@ -194,7 +194,7 @@ cat << EOF >> /etc/crontab
 13 */12 * * * root systemctl restart proxynode
 # END_Autorestart
 EOF
-echo "3.6" > /home/ver
+echo "3.7" > /home/ver
 fi
 clear
 echo -e "========================"
